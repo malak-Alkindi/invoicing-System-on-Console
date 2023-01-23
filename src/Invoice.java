@@ -1,17 +1,28 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Invoice {
 	
 
 
-	
+	  ArrayList<Product> listOfPurchaseItems  ;
 	private	String customerFullName; 
 	private Integer phoneNumber;
-	private	Integer invoiceDate;
+	private	String invoiceDate;
 	private	Integer numberOfItems;
 	private	Integer totalAmount ;
 	private	Integer paidAmount;
 	private	Integer balance;
 	
+	
+	public ArrayList<Product> getlistOfPurchaseItems() {
+		return listOfPurchaseItems;
+	}
+
+
+	public void setListOfPurchaseItems(ArrayList<Product> listOfPurchaseItems) {
+		this.listOfPurchaseItems = listOfPurchaseItems;
+	}
 	public String getCustomerFullName() {
 		return customerFullName;
 	}
@@ -28,11 +39,11 @@ public class Invoice {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public Integer getInvoiceDate() {
+	public String getInvoiceDate() {
 		return invoiceDate;
 	}
 	
-	public void setInvoiceDate(Integer invoiceDate) {
+	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 	
