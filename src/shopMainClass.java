@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class shopMainClass {
@@ -9,7 +13,8 @@ public class shopMainClass {
 		boolean programFlag=true;
 		System.out.println("\t\tstarting of shop program");
 		while(programFlag) {
-			
+			int itemCount=0;
+			int inoviceCount=0;
 			
 			
 			
@@ -53,7 +58,7 @@ public class shopMainClass {
 					}
 				 break;
 			case "b":
-				
+				 HashMap<Integer, Product> listOfItems =new HashMap<>();
 				boolean itemsFlag=true;	
 				while(itemsFlag) {
 					System.out.println("chose from the Shop Settings :\n a. Add Items \n"
@@ -63,32 +68,73 @@ public class shopMainClass {
 							+ " f. go Back"
 							);
 					String subMenuResponce = scan.nextLine().toLowerCase();
-					
+					 
 					switch( subMenuResponce )
 					{
 					
 					case "a":
+						itemCount++;
 						System.out.println("Add Items");
-						itemsFlag=true;
+						Product product = new Product();
+						
+						product.setItemID(itemCount);
+					
+						System.out.println("what is the item name");
+						product.setItemName(scan.nextLine());
+						System.out.println("what is the item unit price");
+						product.setUnitPrice(scan.nextFloat());
+						System.out.println("what is the item quantity");
+						product.setQuantity(scan.nextInt());
+						scan.nextLine();
+						System.out.println("what is the item qtyAmount");
+						product.setQtyAmount(scan.nextInt());
+						scan.nextLine();
+						 
+						listOfItems.put(itemCount, product);
+						 
+						
 						 break;
 					case "b":
-						System.out.println("Delete Items");
-						settingFlag=true;
+						System.out.println("Delete Items : enter the item id you want to delete from below list ");
+						for(Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
+							System.out.println("Item Id: " +entry.getKey() + ", Item Name: "+entry.getValue().getItemName());
+							
+						}
+						listOfItems.remove(scan.nextInt());
+						scan.nextLine();
+					
 						 break;
 					case "c":
-						System.out.println("Change Item Price");
-						settingFlag=true;
+						System.out.println("which item you want to change it is price from below list ");
+						for(Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
+							System.out.println("Item Id: " +entry.getKey() + ", Item price: "+entry.getValue().getUnitPrice());
+							
+						}
+						System.out.println("what is the item id");
+						int id = scan.nextInt();
+						System.out.println("what is the new item unit price");
+						float price = scan.nextFloat();
+					menu.getListOfItems().get(id).setUnitPrice(price);
+						scan.nextLine();
 						 break;
 					case "d":
 						System.out.println("Report All Items");
-						settingFlag=true;
+						System.out.println( menu.getListOfItems());
+					for(Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
+						System.out.println("\n\nItem Id: " +entry.getKey() + "\n\tItem Name: "+entry.getValue().getItemName()
+								 + "\n\tItem price: "+entry.getValue().getUnitPrice());
+						
+						
+					}
 						 break;
 					case "f":
 
 						itemsFlag=false;
 					 break;
 					}
+					menu.setListOfItems(listOfItems);
 					}
+				
 				 break;
 			}
 		

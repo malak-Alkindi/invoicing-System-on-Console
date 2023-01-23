@@ -2,8 +2,8 @@
 public class Product {
 	private Integer itemID;
 	private	String itemName; 
-	private	Integer unitPrice;
-	private	String quantity ; 
+	private	float unitPrice;
+	private	Integer quantity ; 
 	private	Integer qtyAmount;
 	
 	public Integer getItemID() {
@@ -22,19 +22,19 @@ public class Product {
 		this.itemName = itemName;
 	}
 
-	public Integer getUnitPrice() {
+	public float getUnitPrice() {
 		return unitPrice;
 	}
 	
-	public void setUnitPrice(Integer unitPrice) {
+	public void setUnitPrice(float unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 	
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 	
