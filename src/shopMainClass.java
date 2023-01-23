@@ -12,17 +12,18 @@ public class shopMainClass {
 		Menu menu = new Menu();
 		boolean programFlag=true;
 		System.out.println("\t\tstarting of shop program");
+		System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c) create Invoice \n  d) exit ");
 		while(programFlag) {
 			int itemCount=0;
 			int inoviceCount=0;
 			
+			 HashMap<Integer, Product> listOfItems =new HashMap<>();	
 			
 			
 			
 			
 			
-			
-			System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items");
+
 			String MainMenuResponce = scan.nextLine().toLowerCase();
 			switch( MainMenuResponce ) {
 			case "a":
@@ -58,7 +59,7 @@ public class shopMainClass {
 					}
 				 break;
 			case "b":
-				 HashMap<Integer, Product> listOfItems =new HashMap<>();
+				
 				boolean itemsFlag=true;	
 				while(itemsFlag) {
 					System.out.println("chose from the Shop Settings :\n a. Add Items \n"
@@ -136,11 +137,26 @@ public class shopMainClass {
 					}
 				
 				 break;
-			}
-		
+			case "c":
+				System.out.println("creating incvois ");
+				 break;
+				 
+			case "d":
+				System.out.println("Are you sure you want to exit? yes/no");
+				if( scan.nextLine().toLowerCase().equals("no")) {
+					System.out.println("\t\tstarting of shop program");
+				}
+				else if( scan.nextLine().toLowerCase().equals("yes")) {
+					System.out.println("Exit the shop program");
+				 programFlag=false;
 				
+				}
+				 break;
+			}
+		
+
 			
-			System.out.println("Are you sure you want to exit? yes/No");
+			System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c) create Invoice \n  d) exit ");
 		
 			
 			
@@ -167,17 +183,10 @@ public class shopMainClass {
 			
 			
 			
-			if( scan.nextLine().toLowerCase().equals("no")) {
-				System.out.println("\t\tstarting of shop program");
-			}
-			else if( scan.nextLine().toLowerCase().equals("yes")) {
-				System.out.println("Exit the shop program");
-			 programFlag=false;
 			
 			}
-		
 		}
 
 	}
 
-}
+
