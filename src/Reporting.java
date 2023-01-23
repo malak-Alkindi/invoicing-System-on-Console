@@ -33,9 +33,21 @@ error.getMessage();
 }
 	
 	static void  createAllInvoiceReport(String name) throws IOException {
+		
 		File file = new File("AllInvoiceReport.txt");
 		FileWriter w = new FileWriter("AllInvoiceReport.txt");
+		w.write("\t\tAllInvoiceReport");
+		w.write(name);
+		w.close();
+
+
+}
+	
+static void  statics(String name) throws IOException {
 		
+		File file = new File("Statistics.txt");
+		FileWriter w = new FileWriter("Statistics .txt");
+		w.write("\t\tAllInvoiceReport");
 		w.write(name);
 		w.close();
 
