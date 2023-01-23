@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class shopMainClass {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		LocalDateTime now = LocalDateTime.now();
 
 		Scanner scan = new Scanner(System.in);
@@ -51,14 +52,21 @@ public class shopMainClass {
 							}
 						}
 						System.out.println("Load Data (invoices)");
-						
+				
 						if (menu.getMapOfInvoices() == null) {
 							System.out.println("no invoices added"+"\n");
 						} else {
 							for (Entry<Integer, Invoice> entry : menu.getMapOfInvoices().entrySet()) {
 								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
 										+ entry.getValue().getCustomerFullName()+"\n");
-						
+								Reporting.createAllInvoiceReport("\t\t<"+entry.getKey().toString()+">\ninvoice date\t:"
+										+entry.getValue().getInvoiceDate() +"\ncustomer Name\t: "
+												+ entry.getValue().getCustomerFullName()
+												 +"\nNo of items\t: "
+													+ entry.getValue().getNumberOfItems()
+													+"\nTotal\t: "
+													+ entry.getValue().getTotalAmount()+"\nBalance\t: "
+															+ entry.getValue().getBalance());
 							}
 							
 						}

@@ -1,0 +1,6 @@
+ddddddd		<1>
+invoice date	:23-01-2023 17:04:19
+customer Name	: malak
+No of items	: 1
+Total	: 1
+Balance	: 1
