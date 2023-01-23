@@ -32,8 +32,8 @@ public class shopMainClass {
 				boolean settingFlag = true;
 				while (settingFlag) {
 					System.out.println("chose from the Shop Settings :\n a. Load Data (Items and invoices)\n"
-							+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"
-							+ " d. Go Back\r");
+							+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"+ " d. search Invoice\n" 
+							+ " f. Go Back\r");
 					String subMenuResponce = scan.nextLine().toLowerCase();
 
 					switch (subMenuResponce) {
@@ -41,23 +41,23 @@ public class shopMainClass {
 					case "a":
 						System.out.println("Load Data (Items)");
 						if (menu.getMapOfInvoices() == null) {
-							System.out.println("no items added");
+							System.out.println("no items added"+"\n");
 						} else {
 							for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
 								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
 										+ entry.getValue().getItemName() + "\n\tItem price: "
-										+ entry.getValue().getUnitPrice());
+										+ entry.getValue().getUnitPrice()+"\n");
 
 							}
 						}
 						System.out.println("Load Data (invoices)");
 						
 						if (menu.getMapOfInvoices() == null) {
-							System.out.println("no invoices added");
+							System.out.println("no invoices added"+"\n");
 						} else {
 							for (Entry<Integer, Invoice> entry : menu.getMapOfInvoices().entrySet()) {
 								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-										+ entry.getValue().getCustomerFullName());
+										+ entry.getValue().getCustomerFullName()+"\n");
 
 							}
 						}
@@ -78,7 +78,38 @@ public class shopMainClass {
 						System.out.println("pls enter Website ");
 						shop.setWebsite(scan.nextLine());
 						break;
+						
 					case "d":
+
+						if (menu.getMapOfInvoices() == null) {
+							System.out.println("no invoices added"+"\n");
+						} else {
+							System.out.println("pls enter the inovise id you want to show :");
+							
+							Invoice invoiceObj =menu.getMapOfInvoices().get(scan.nextInt());
+							scan.nextLine();
+							System.out.println("customer Full Name/t:"+invoiceObj.getCustomerFullName());
+							System.out.println("phone Number/t:"+invoiceObj.getPhoneNumber());
+							System.out.println("invoice Date/t:"+invoiceObj.getInvoiceDate());
+							System.out.println("number Of Items/t:"+invoiceObj.getNumberOfItems());
+							System.out.println("total Amount/t:"+invoiceObj.getTotalAmount());
+							System.out.println("paid Amount/t:"+invoiceObj.getPaidAmount());
+							System.out.println("balance/t:"+invoiceObj.getBalance()+"\n");
+							
+							System.out.println("/t/t<items purches>");
+							for(Product p :invoiceObj.getlistOfPurchaseItems()) {
+								System.out.println("\titem id\t:"+p.getItemID());
+								System.out.println("\titem name\t:"+p.getItemName());
+								System.out.println("\titem unit price\t:"+p.getUnitPrice());
+								System.out.println("\titem quantity\t:"+p.getQuantity());
+							    System.out.println("\titem qty amount\t:"+p.getQtyAmount() +"\n");
+							
+							}
+						}
+					
+						break;
+					
+					case "f":
 
 						settingFlag = false;
 						break;
@@ -147,7 +178,7 @@ public class shopMainClass {
 						for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
 							System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
 									+ entry.getValue().getItemName() + "\n\tItem price: "
-									+ entry.getValue().getUnitPrice());
+									+ entry.getValue().getUnitPrice()+"\n");
 
 						}
 						break;
@@ -219,14 +250,7 @@ public class shopMainClass {
 				}
 				break;
 			}
-			if (menu.getMapOfInvoices() == null) {
-			} else {
-				for (Entry<Integer, Invoice> entry : menu.getMapOfInvoices().entrySet()) {
-					System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-							+ entry.getValue().getCustomerFullName());
-
-				}
-			}
+	
 
 			System.out.println(
 					"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c) create Invoice \n  d) exit ");
