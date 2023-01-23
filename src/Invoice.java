@@ -1,11 +1,23 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Invoice {
+public class Invoice implements Serializable {
 	
 
 
 	  ArrayList<Product> listOfPurchaseItems  ;
+		private Integer invoiceId;
+	
+		public Integer getInvoiceId() {
+			return invoiceId;
+		}
+
+
+		public void setInvoiceId(Integer invoiceId) {
+			this.invoiceId = invoiceId;
+		}
+
 	private	String customerFullName; 
 	private Integer phoneNumber;
 	private	String invoiceDate;

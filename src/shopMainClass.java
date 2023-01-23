@@ -58,8 +58,9 @@ public class shopMainClass {
 							for (Entry<Integer, Invoice> entry : menu.getMapOfInvoices().entrySet()) {
 								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
 										+ entry.getValue().getCustomerFullName()+"\n");
-
+						
 							}
+							
 						}
 						break;
 					case "b":
@@ -88,15 +89,15 @@ public class shopMainClass {
 							
 							Invoice invoiceObj =menu.getMapOfInvoices().get(scan.nextInt());
 							scan.nextLine();
-							System.out.println("customer Full Name/t:"+invoiceObj.getCustomerFullName());
-							System.out.println("phone Number/t:"+invoiceObj.getPhoneNumber());
-							System.out.println("invoice Date/t:"+invoiceObj.getInvoiceDate());
-							System.out.println("number Of Items/t:"+invoiceObj.getNumberOfItems());
-							System.out.println("total Amount/t:"+invoiceObj.getTotalAmount());
-							System.out.println("paid Amount/t:"+invoiceObj.getPaidAmount());
-							System.out.println("balance/t:"+invoiceObj.getBalance()+"\n");
+							System.out.println("customer Full Name\t:"+invoiceObj.getCustomerFullName());
+							System.out.println("phone Number\t:"+invoiceObj.getPhoneNumber());
+							System.out.println("invoice Date\t:"+invoiceObj.getInvoiceDate());
+							System.out.println("number Of Items\t:"+invoiceObj.getNumberOfItems());
+							System.out.println("total Amount\t:"+invoiceObj.getTotalAmount());
+							System.out.println("paid Amount\t:"+invoiceObj.getPaidAmount());
+							System.out.println("balance\t:"+invoiceObj.getBalance()+"\n");
 							
-							System.out.println("/t/t<items purches>");
+							System.out.println("\t\t<items purches>");
 							for(Product p :invoiceObj.getlistOfPurchaseItems()) {
 								System.out.println("\titem id\t:"+p.getItemID());
 								System.out.println("\titem name\t:"+p.getItemName());
@@ -220,6 +221,7 @@ public class shopMainClass {
 					}
 
 				}
+				invoice.setInvoiceId(inoviceCount);
 				invoice.setListOfPurchaseItems(listOfPurchaseItems);
 				System.out.println("what is the customer Full Name ?");
 				invoice.setCustomerFullName(scan.nextLine());
@@ -236,6 +238,7 @@ public class shopMainClass {
 				scan.nextLine();
 				invoice.setBalance(invoice.getPaidAmount() - totalAmount);
 				mapOfInvoices.put(inoviceCount, invoice);
+				Reporting.createInvoiceReport(invoice);
 				menu.setMapOfInvoices(mapOfInvoices);
 				break;
 
@@ -245,6 +248,7 @@ public class shopMainClass {
 					System.out.println("\t\tstarting of shop program");
 				} else if (scan.nextLine().toLowerCase().equals("yes")) {
 					System.out.println("Exit the shop program");
+			
 					programFlag = false;
 
 				}
