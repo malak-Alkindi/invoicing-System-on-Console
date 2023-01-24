@@ -1,14 +1,10 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -202,8 +198,10 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 
 
 
-							System.out.println("what is the item id");
-							Integer id = scan.nextInt();
+							System.out.println("what is the item id");	
+							Integer id=0;
+							
+						id= scan.nextInt();
 							System.out.println("what is the new item unit price");
 							float price = scan.nextFloat();
 							
@@ -379,10 +377,11 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 						"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
 						+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
 
-			}}
-//		} catch (Exception error) {
-//			System.out.println(error.getMessage());
-//		}
+			}
+		} catch (Exception error) {
+			
+			System.out.println(error.getMessage());
+		}
 		
 	}
 

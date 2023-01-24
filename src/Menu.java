@@ -1,12 +1,11 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Menu implements Serializable {
 	  HashMap<Integer, Invoice> mapOfInvoices ;
 	  HashMap<Integer, Product> listOfItems  ;
 	  
-	
+
 	
 
 	public HashMap<Integer, Invoice> getMapOfInvoices() {
@@ -28,13 +27,6 @@ public class Menu implements Serializable {
 		this.listOfItems = listOfItems;
 	}
 
-	// genral method : Shop Settings
-	  void LoadData (){}
-	  
-	  // genral method :Manage Shop Items
-	  void AddItems () {}
-	  void DeleteItems (){}
-	  void ChangeItemPrice (){}
-	  void ReportAllItems  (){}
+
 
 }
