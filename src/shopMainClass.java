@@ -37,7 +37,8 @@ public class shopMainClass {
 		boolean programFlag = true;
 		System.out.println("\t\tstarting of shop program");
 		System.out.println(
-				"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c) create Invoice \n  d) exit ");
+				"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
+				+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
 		while (programFlag) {
 
 			String MainMenuResponce = scan.nextLine().toLowerCase();
@@ -302,6 +303,40 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 				break;
 
 			case "d":
+			int TotalSales=0;
+			
+				for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
+					
+					Invoice p=Reporting.getInvoicesReport(i.toString());
+					
+					TotalSales+=p.getTotalAmount();
+			
+					}
+				Reporting.createStatisticsReport("No Of Items\t:" +Reporting.countInvoiceFiles()+ "\nNo of Invoices\t:" +Reporting.countInvoiceFiles()+ "\nTotal Sales\t:"+
+						TotalSales);
+				System.out.println("file created succefully");
+				break;
+
+			case "e":
+				String whatToWrite="";
+				for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
+					
+					Invoice p=Reporting.getInvoicesReport(i.toString());
+					
+					whatToWrite+=("\nInvoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
+							+ p.getCustomerFullName()+ "\n\tInvoice date "
+							+ p.getInvoiceDate()+ "\n\tBalance "
+									+ p.getBalance()+"\n------------------------------\n\n"
+			);
+					}
+				Reporting.createAllInvoiceReport(whatToWrite
+			);
+				System.out.println("file created succefully");
+				break;
+
+			case "f":
+				break;
+			case "x":
 				System.out.println("Are you sure you want to exit? yes/no");
 				if (scan.nextLine().toLowerCase().equals("no")) {
 					System.out.println("\t\tstarting of shop program");

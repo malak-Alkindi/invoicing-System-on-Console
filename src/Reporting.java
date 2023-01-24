@@ -94,8 +94,16 @@ public class Reporting  implements Serializable{
 		w.close();
 
 	}
+	static void createStatisticsReport(String name) throws IOException {
 
-	File file = new File("Statistics.txt");
+		File file = new File("Statistics.txt");
+		FileWriter w = new FileWriter("Statistics .txt");
+		w.write("\t\tStatistics\n\n");
+		w.write(name);
+		w.close();
+
+	}
+	
 
 	static void statics(String name) throws IOException {
 
@@ -116,7 +124,7 @@ public class Reporting  implements Serializable{
 			// Read objects
 			 in = (Invoice) oi.readObject();
 
-			System.out.println(in.getCustomerFullName() + "\n");
+		
 
 			oi.close();
 			fi.close();

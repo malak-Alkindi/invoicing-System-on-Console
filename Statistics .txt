@@ -1,0 +1,5 @@
+		Statistics
+
+No Of Items	:2
+No of Invoices	:2
+Total Sales	:295

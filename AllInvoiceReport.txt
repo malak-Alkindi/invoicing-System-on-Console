@@ -1,6 +1,14 @@
-		AllInvoiceReport		<2>
-invoice date	:24-01-2023 09:25:48
-customer Name	: haitham
-No of items	: 3
-Total	: 3
-Balance	: -2
+		AllInvoiceReport
+Invoice Id: 1
+	customer Name: 1
+	Invoice date 24-01-2023 11:47:43
+	Balance -179
+------------------------------
+
+
+Invoice Id: 2
+	customer Name: pop
+	Invoice date 24-01-2023 12:29:38
+	Balance 85
+------------------------------
+
