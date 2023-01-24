@@ -101,13 +101,11 @@ public class shopMainClass {
 						
 					case "d":
 
-						if (menu.getMapOfInvoices() == null) {
-							System.out.println("no invoices added"+"\n");
-						} else {
+					
 							System.out.println("pls enter the inovise id you want to show :");
-							
-							Invoice invoiceObj =menu.getMapOfInvoices().get(scan.nextInt());
-							scan.nextLine();
+						
+							Invoice invoiceObj =	Reporting.getInvoicesReport(scan.nextLine());;
+					
 							System.out.println("customer Full Name\t:"+invoiceObj.getCustomerFullName());
 							System.out.println("phone Number\t:"+invoiceObj.getPhoneNumber());
 							System.out.println("invoice Date\t:"+invoiceObj.getInvoiceDate());
@@ -125,7 +123,7 @@ public class shopMainClass {
 							    System.out.println("\titem qty amount\t:"+p.getQtyAmount() +"\n");
 							
 							}
-						}
+						
 					
 						break;
 					
@@ -182,17 +180,48 @@ public class shopMainClass {
 						break;
 					case "c":
 						System.out.println("which item you want to change it is price from below list ");
-						for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
-							System.out.println(
-									"Item Id: " + entry.getKey() + ", Item price: " + entry.getValue().getUnitPrice());
+for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
+							
+							Product p=Reporting.getitemsReport(i.toString());
+							
+							System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+								+ p.getItemName() + "\n\tItem price: "
+									+ p.getUnitPrice()+"\n");
 
+					
+						
 						}
+
+
+
+
+
 						System.out.println("what is the item id");
-						int id = scan.nextInt();
+						Integer id = scan.nextInt();
 						System.out.println("what is the new item unit price");
 						float price = scan.nextFloat();
-						menu.getListOfItems().get(id).setUnitPrice(price);
-						scan.nextLine();
+						
+						
+						Product pp = new Product();
+
+						pp.setItemID(itemCount);
+						Product theSelctetitem =Reporting.getitemsReport(id.toString());
+						pp.setItemID(id);
+						pp.setItemName(theSelctetitem.getItemName());
+						
+						pp.setUnitPrice(price);
+				
+						pp.setQuantity(theSelctetitem.getQuantity());
+						
+						
+						pp.setQtyAmount(theSelctetitem.getQtyAmount());
+						
+						
+						
+						Reporting.creatItemsReport(pp);
+//						
+//						menu.getListOfItems().get(id).setUnitPrice(price);
+					scan.nextLine();
 						break;
 					case "d":
 						System.out.println("Report All Items");
@@ -225,15 +254,19 @@ public class shopMainClass {
 				boolean purchaseFlag = true;
 				ArrayList<Product> listOfPurchaseItems = new ArrayList<>();
 				System.out.println("enter the item id , customer purchase from below list of items ");
-				for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
-					System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-							+ entry.getValue().getItemName() + "\n\tItem price: " + entry.getValue().getUnitPrice());
+				for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
+					
+					Product p=Reporting.getitemsReport(i.toString());
+					
+					System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+						+ p.getItemName() + "\n\tItem price: "
+							+ p.getUnitPrice()+"\n");
 
-				}
+			}
+				
 				while (purchaseFlag) {
-
-					listOfPurchaseItems.add(menu.getListOfItems().get(scan.nextInt()));
-					scan.nextLine();
+					listOfPurchaseItems.add(Reporting.getitemsReport(scan.nextLine()));
+				
 					System.out.println("do you want to add another purchase? yes/no");
 					if (scan.nextLine().equals("no")) {
 						for (Product p : listOfPurchaseItems) {

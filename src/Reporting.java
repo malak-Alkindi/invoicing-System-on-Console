@@ -108,7 +108,7 @@ public class Reporting  implements Serializable{
 
 	static Invoice getInvoicesReport(String i) {
 		Invoice in=null;
-		System.out.println("the out put from the saved opjects : " + i);
+	
 		try {
 			FileInputStream fi = new FileInputStream(new File("invoiceReport\\" + i + ".txt"));
 			ObjectInputStream oi = new ObjectInputStream(fi);
