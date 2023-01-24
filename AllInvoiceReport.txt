@@ -1,6 +1,6 @@
-ddddddd		<1>
-invoice date	:23-01-2023 17:04:19
-customer Name	: malak
-No of items	: 1
-Total	: 1
-Balance	: 1
+		AllInvoiceReport		<2>
+invoice date	:24-01-2023 09:25:48
+customer Name	: haitham
+No of items	: 3
+Total	: 3
+Balance	: -2

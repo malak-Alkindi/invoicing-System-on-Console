@@ -1,21 +1,35 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+
+
 import java.util.Scanner;
 
 public class shopMainClass {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		LocalDateTime now = LocalDateTime.now();
+		
+		
+	
+		
+	
+		
 
 		Scanner scan = new Scanner(System.in);
 		Menu menu = new Menu();
-		int itemCount = 0;
-		int inoviceCount = 0;
+		int itemCount = Math.toIntExact(Reporting.countItemsFiles()) ;;
+		int inoviceCount =Math.toIntExact(Reporting.countInvoiceFiles()) ;
 		HashMap<Integer, Product> listOfItems = new HashMap<>();
 		HashMap<Integer, Invoice> mapOfInvoices = new HashMap<>();
 		
@@ -40,36 +54,33 @@ public class shopMainClass {
 					switch (subMenuResponce) {
 
 					case "a":
-						System.out.println("Load Data (Items)");
-						if (menu.getMapOfInvoices() == null) {
-							System.out.println("no items added"+"\n");
-						} else {
-							for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
-								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-										+ entry.getValue().getItemName() + "\n\tItem price: "
-										+ entry.getValue().getUnitPrice()+"\n");
-
-							}
-						}
-						System.out.println("Load Data (invoices)");
-				
-						if (menu.getMapOfInvoices() == null) {
-							System.out.println("no invoices added"+"\n");
-						} else {
-							for (Entry<Integer, Invoice> entry : menu.getMapOfInvoices().entrySet()) {
-								System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-										+ entry.getValue().getCustomerFullName()+"\n");
-								Reporting.createAllInvoiceReport("\t\t<"+entry.getKey().toString()+">\ninvoice date\t:"
-										+entry.getValue().getInvoiceDate() +"\ncustomer Name\t: "
-												+ entry.getValue().getCustomerFullName()
-												 +"\nNo of items\t: "
-													+ entry.getValue().getNumberOfItems()
-													+"\nTotal\t: "
-													+ entry.getValue().getTotalAmount()+"\nBalance\t: "
-															+ entry.getValue().getBalance());
-							}
+						System.out.println("\tLoad Data (Items)");
+						for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 							
-						}
+							Product p=Reporting.getitemsReport(i.toString());
+							
+							System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+								+ p.getItemName() + "\n\tItem price: "
+									+ p.getUnitPrice()+"\n");
+
+					}
+						
+						
+						
+						
+						System.out.println("\t-------------------------------\n");
+						System.out.println("\tLoad Data (invoices)\n");
+				
+	for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
+							
+		Invoice p=Reporting.getInvoicesReport(i.toString());
+							
+							System.out.println("Invoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
+								+ p.getCustomerFullName()+ "\n\tInvoice date "
+									+ p.getInvoiceDate()+"\n");
+
+					}
+	System.out.println("\t-------------------------------\n");
 						break;
 					case "b":
 						System.out.println("pls enter Shop Name");
@@ -151,8 +162,10 @@ public class shopMainClass {
 						scan.nextLine();
 						System.out.println("what is the item qtyAmount");
 						product.setQtyAmount(scan.nextInt());
+						System.out.println(product.getItemName());
+					
 						scan.nextLine();
-
+						Reporting.creatItemsReport(product);
 						listOfItems.put(itemCount, product);
 
 						break;
@@ -184,11 +197,16 @@ public class shopMainClass {
 					case "d":
 						System.out.println("Report All Items");
 
-						for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
-							System.out.println("\n\nItem Id: " + entry.getKey() + "\n\tItem Name: "
-									+ entry.getValue().getItemName() + "\n\tItem price: "
-									+ entry.getValue().getUnitPrice()+"\n");
+	for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
+							
+							Product p=Reporting.getitemsReport(i.toString());
+							
+							System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+								+ p.getItemName() + "\n\tItem price: "
+									+ p.getUnitPrice()+"\n");
 
+					
+						
 						}
 						break;
 					case "f":

@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Product {
+public class Product  implements Serializable {
 	private Integer itemID;
 	private	String itemName; 
 	private	float unitPrice;

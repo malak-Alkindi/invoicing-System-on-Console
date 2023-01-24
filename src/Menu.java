@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Menu {
+public class Menu implements Serializable {
 	  HashMap<Integer, Invoice> mapOfInvoices ;
 	  HashMap<Integer, Product> listOfItems  ;
 	  
