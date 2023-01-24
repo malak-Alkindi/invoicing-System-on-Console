@@ -20,12 +20,14 @@ public class shopMainClass {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		LocalDateTime now = LocalDateTime.now();
 		
-		
+		 int ShopSettings=Reporting.getProgramStatisticsReport().getShopSettings();
+		 int ManageShopItems=Reporting.getProgramStatisticsReport().getManageShopItems();
+		 int createInvoice =Reporting.getProgramStatisticsReport().getCreateInvoice();
+		 int staticsreport=Reporting.getProgramStatisticsReport().getStaticsreport();
+		 int  AllInvoicesreport=Reporting.getProgramStatisticsReport().getAllInvoicesreport();
+		 int  showProgramStatistics=Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
 	
-		
-	
-		
-
+		 ProgramStatistics ps =new ProgramStatistics();
 		Scanner scan = new Scanner(System.in);
 		Menu menu = new Menu();
 		int itemCount = Math.toIntExact(Reporting.countItemsFiles()) ;;
@@ -45,8 +47,10 @@ public class shopMainClass {
 
 			switch (MainMenuResponce) {
 			case "a":
+				
 				boolean settingFlag = true;
 				while (settingFlag) {
+					ShopSettings++;
 					System.out.println("chose from the Shop Settings :\n a. Load Data (Items and invoices)\n"
 							+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"+ " d. search Invoice\n" 
 							+ " f. Go Back\r");
@@ -136,9 +140,10 @@ public class shopMainClass {
 				}
 				break;
 			case "b":
-
+				
 				boolean itemsFlag = true;
 				while (itemsFlag) {
+					ManageShopItems++;
 					System.out.println("chose from the Shop Settings :\n a. Add Items \n" + " b. Delete Items\n"
 							+ " c. Change Item Price\n" + " d. Report All Items\n" + " f. go Back");
 					String subMenuResponce = scan.nextLine().toLowerCase();
@@ -249,6 +254,7 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 
 				break;
 			case "c":
+				createInvoice++;
 				inoviceCount++;
 				int totalAmount = 0;
 				Invoice invoice = new Invoice();
@@ -303,6 +309,7 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 				break;
 
 			case "d":
+				staticsreport++;
 			int TotalSales=0;
 			
 				for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
@@ -312,12 +319,13 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					TotalSales+=p.getTotalAmount();
 			
 					}
-				Reporting.createStatisticsReport("No Of Items\t:" +Reporting.countInvoiceFiles()+ "\nNo of Invoices\t:" +Reporting.countInvoiceFiles()+ "\nTotal Sales\t:"+
+				Reporting.createStatisticsReport("No Of Items\t:" +Reporting.countItemsFiles()+ "\nNo of Invoices\t:" +Reporting.countInvoiceFiles()+ "\nTotal Sales\t:"+
 						TotalSales);
 				System.out.println("file created succefully");
 				break;
 
 			case "e":
+				AllInvoicesreport++;
 				String whatToWrite="";
 				for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
 					
@@ -335,7 +343,24 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 				break;
 
 			case "f":
-				break;
+				showProgramStatistics++;
+					ps.setAllInvoicesreport(AllInvoicesreport);
+				ps.setCreateInvoice(createInvoice);
+				ps.setManageShopItems(ManageShopItems);
+				ps.setShopSettings(ShopSettings);
+				ps.setStaticsreport(staticsreport);
+				ps.setShowProgramStatistics(showProgramStatistics);
+			Reporting.createProgramStatisticsReport(ps);
+			
+			System.out.println(
+				"\n\t\tthe program statics\n\nShop Settings\t:"+Reporting.getProgramStatisticsReport().getShopSettings()
+			+  "\nManage Shop Items\t:"+Reporting.getProgramStatisticsReport().getManageShopItems()
+			+  "\ncreate Invoice\t:"+Reporting.getProgramStatisticsReport().getCreateInvoice()
+			+"\nreate items/invoices statics report\t:"+Reporting.getProgramStatisticsReport().getStaticsreport()
+			+"\ncreate All Invoices report\t:"+Reporting.getProgramStatisticsReport().getAllInvoicesreport()
+			+"\nshow Program Statistics\t:"+Reporting.getProgramStatisticsReport().getShowProgramStatistics()+"\n");
+				
+			break;
 			case "x":
 				System.out.println("Are you sure you want to exit? yes/no");
 				if (scan.nextLine().toLowerCase().equals("no")) {
@@ -351,7 +376,8 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 	
 
 			System.out.println(
-					"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c) create Invoice \n  d) exit ");
+					"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
+					+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
 
 		}
 	}

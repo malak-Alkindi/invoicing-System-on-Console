@@ -107,13 +107,54 @@ public class Reporting  implements Serializable{
 
 	static void statics(String name) throws IOException {
 
+		
+
 		FileWriter w = new FileWriter("Statistics .txt");
 		w.write("\t\tAllInvoiceReport");
 		w.write(name);
 		w.close();
 
 	}
+	static void createProgramStatisticsReport(ProgramStatistics PS) throws IOException {
+		try {
+		
 
+			File oldFile = new File( "ProgramStatisticsReport.txt");
+			
+			FileOutputStream ff = new FileOutputStream(oldFile);
+			ObjectOutputStream o = new ObjectOutputStream(ff);
+
+			// Write objects to file
+			o.writeObject(PS);
+
+			o.close();
+			ff.close();
+		} catch (Exception error) {
+			error.getMessage();
+		}
+
+	}
+
+	
+	static ProgramStatistics getProgramStatisticsReport() {
+		ProgramStatistics in=null;
+	
+		try {
+			FileInputStream fi = new FileInputStream(new File("ProgramStatisticsReport.txt"));
+			ObjectInputStream oi = new ObjectInputStream(fi);
+
+			// Read objects
+			 in = (ProgramStatistics) oi.readObject();
+
+		
+
+			oi.close();
+			fi.close();
+		} catch (Exception error) {
+			error.getMessage();
+		}
+return in;
+	}
 	static Invoice getInvoicesReport(String i) {
 		Invoice in=null;
 	
