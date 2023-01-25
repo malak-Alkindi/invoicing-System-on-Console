@@ -202,9 +202,19 @@ System.out.println("\t-------------------------------\n");
 										"Item Id: " + entry.getKey() + ", Item Name: " + entry.getValue().getItemName());
 
 							}
-							listOfItems.remove(scan.nextInt());
-							scan.nextLine();
+							try {
+								if(listOfItems.remove(scan.nextInt())!=null) {
+									scan.nextLine();
 							}
+							else {
+								System.out.println("\nno items with this id currently added\n");
+							}
+						
+					
+							}catch (Exception error) {
+								System.out.println("\nno items with this id currently added\n");
+								scan.nextLine();
+							}}
 								else {System.out.println("\n\tno new items added to be deleted\n");}}
 							else {System.out.println("\n\tno new items added to be deleted\n");}
 							break;
