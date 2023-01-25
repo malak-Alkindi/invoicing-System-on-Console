@@ -219,6 +219,7 @@ System.out.println("\t-------------------------------\n");
 							else {System.out.println("\n\tno new items added to be deleted\n");}
 							break;
 						case "c":
+							if(Reporting.countItemsFiles()>0) {
 							System.out.println("which item you want to change it is price from below list ");
 for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 								
@@ -238,15 +239,17 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 
 							System.out.println("what is the item id");	
 							Integer id=0;
-							
-						id= scan.nextInt();
-							System.out.println("what is the new item unit price");
-							float price = scan.nextFloat();
-							
-							
-							Product pp = new Product();
+							id= scan.nextInt();
+				
+							if(Reporting.getitemsReport(id.toString())!=null) {
+						
+								System.out.println("what is the new item unit price");
+								float price = scan.nextFloat();
+								
+								
+								Product pp = new Product();
 
-							pp.setItemID(itemCount);
+								pp.setItemID(itemCount);
 							Product theSelctetitem =Reporting.getitemsReport(id.toString());
 							pp.setItemID(id);
 							pp.setItemName(theSelctetitem.getItemName());
@@ -261,9 +264,13 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 							
 							
 							Reporting.creatItemsReport(pp);
-//						
-//						menu.getListOfItems().get(id).setUnitPrice(price);
 						scan.nextLine();
+							}
+							else {
+								System.out.println("\n\tno items added with this id\n");}
+							}else {
+								System.out.println("\n\tno items added\n");
+							}
 							break;
 						case "d":
 							System.out.println("Report All Items");
