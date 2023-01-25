@@ -16,43 +16,46 @@ public class shopMainClass {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		LocalDateTime now = LocalDateTime.now();
-	
-	
-			Reporting.createFolderItemsReport();
-			Reporting.createFolderInvoiceReport();
-			
-			 int ShopSettings=0;
-			 int ManageShopItems=0;
-			 int createInvoice =0;
-			 int staticsreport=0;
-			 int  AllInvoicesreport=0;
-			 int  showProgramStatistics=0;
-		
+
+		Reporting.createFolderItemsReport();
+		Reporting.createFolderInvoiceReport();
+
+		int ShopSettings ;
+		int ManageShopItems  ;
+		int createInvoice ;
+		int staticsreport ;
+		int AllInvoicesreport ;
+		int showProgramStatistics ;
+
 		try {
-		ShopSettings=Reporting.getProgramStatisticsReport().getShopSettings();
-		 ManageShopItems=Reporting.getProgramStatisticsReport().getManageShopItems();
-		  createInvoice =Reporting.getProgramStatisticsReport().getCreateInvoice();
-		  staticsreport=Reporting.getProgramStatisticsReport().getStaticsreport();
-		   AllInvoicesreport=Reporting.getProgramStatisticsReport().getAllInvoicesreport();
-		   showProgramStatistics=Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
-		}
-		catch (Exception error) {
-			
+			ShopSettings = Reporting.getProgramStatisticsReport().getShopSettings();
+			ManageShopItems = Reporting.getProgramStatisticsReport().getManageShopItems();
+			createInvoice = Reporting.getProgramStatisticsReport().getCreateInvoice();
+			staticsreport = Reporting.getProgramStatisticsReport().getStaticsreport();
+			AllInvoicesreport = Reporting.getProgramStatisticsReport().getAllInvoicesreport();
+			showProgramStatistics = Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
+		} catch (Exception error) {
+			ShopSettings = 0;
+		 ManageShopItems = 0;
+			 createInvoice = 0;
+			 staticsreport = 0;
+			 AllInvoicesreport = 0;
+			 showProgramStatistics = 0;
 			error.getMessage();
 		}
-		 ProgramStatistics ps =new ProgramStatistics();
+		ProgramStatistics ps = new ProgramStatistics();
 		try (Scanner scan = new Scanner(System.in)) {
 			Menu menu = new Menu();
-			int itemCount = Math.toIntExact(Reporting.countItemsFiles()) ;;
-			int inoviceCount =Math.toIntExact(Reporting.countInvoiceFiles()) ;
+			int itemCount = Math.toIntExact(Reporting.countItemsFiles());
+			;
+			int inoviceCount = Math.toIntExact(Reporting.countInvoiceFiles());
 			HashMap<Integer, Product> listOfItems = new HashMap<>();
 			HashMap<Integer, Invoice> mapOfInvoices = new HashMap<>();
-			
-			Shop shop= new Shop();
+
+			Shop shop = new Shop();
 			boolean programFlag = true;
 			System.out.println("\t\tstarting of shop program");
-			System.out.println(
-					"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
+			System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
 					+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
 			while (programFlag) {
 
@@ -60,56 +63,58 @@ public class shopMainClass {
 
 				switch (MainMenuResponce) {
 				case "a":
-					
+
 					boolean settingFlag = true;
 					while (settingFlag) {
 						ShopSettings++;
 						System.out.println("chose from the Shop Settings :\n a. Load Data (Items and invoices)\n"
-								+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"+ " d. search Invoice\n" 
-								+ " f. Go Back\r");
+								+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"
+								+ " d. search Invoice\n" + " f. Go Back\r");
 						String subMenuResponce = scan.nextLine().toLowerCase();
 
 						switch (subMenuResponce) {
 
 						case "a":
-							if(Reporting.countItemsFiles()>0){
-							System.out.println("\tLoad Data (Items)");
-							for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
-								
-								Product p=Reporting.getitemsReport(i.toString());
-								
-								System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
-									+ p.getItemName() + "\n\tItem price: "
-										+ p.getUnitPrice()+"\n");
+							if (Reporting.countItemsFiles() > 0) {
+								System.out.println("\tLoad Data (Items)");
+								for (Long i = (long) 1; i <= Reporting.countItemsFiles(); i++) {
 
-						}}
-							
-							else {System.out.println("\tno items added");}
-							
-							
-							System.out.println("\t-------------------------------\n");
-							
-							if(Reporting.countInvoiceFiles()>0){
-								System.out.println("\tLoad Data (invoices)\n" +Reporting.countInvoiceFiles());
-								
-								for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
-																
-											Invoice p=Reporting.getInvoicesReport(i.toString());
-																
-																System.out.println("Invoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
-																	+ p.getCustomerFullName()+ "\n\tInvoice date "
-																		+ p.getInvoiceDate()+"\n");
+									Product p = Reporting.getitemsReport(i.toString());
+
+									System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+											+ p.getItemName() + "\n\tItem price: " + p.getUnitPrice() + "\n");
+
 								}
-														}
-								else {System.out.println("\tno invoices added");}
-							
-System.out.println("\t-------------------------------\n");
+							}
+
+							else {
+								System.out.println("\tno items added");
+							}
+
+							System.out.println("\t-------------------------------\n");
+
+							if (Reporting.countInvoiceFiles() > 0) {
+								System.out.println("\tLoad Data (invoices)\n" + Reporting.countInvoiceFiles());
+
+								for (Long i = (long) 1; i <= Reporting.countInvoiceFiles(); i++) {
+
+									Invoice p = Reporting.getInvoicesReport(i.toString());
+
+									System.out.println("Invoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
+											+ p.getCustomerFullName() + "\n\tInvoice date " + p.getInvoiceDate()
+											+ "\n");
+								}
+							} else {
+								System.out.println("\tno invoices added");
+							}
+
+							System.out.println("\t-------------------------------\n");
 							break;
 						case "b":
 							System.out.println("pls enter Shop Name");
 							shop.setName(scan.nextLine());
 							Reporting.creatShopInfoFile(shop);
-						
+
 							break;
 						case "c":
 							System.out.println("Set Invoice Header (Tel / Fax / Email / Website)");
@@ -124,37 +129,37 @@ System.out.println("\t-------------------------------\n");
 							shop.setWebsite(scan.nextLine());
 							Reporting.creatShopInfoFile(shop);
 							break;
-							
+
 						case "d":
 
-							if(Reporting.countInvoiceFiles()>0){
+							if (Reporting.countInvoiceFiles() > 0) {
 								System.out.println("pls enter the inovise id you want to show :");
-								
-								Invoice invoiceObj =	Reporting.getInvoicesReport(scan.nextLine());;
-						
-								System.out.println("customer Full Name\t:"+invoiceObj.getCustomerFullName());
-								System.out.println("phone Number\t:"+invoiceObj.getPhoneNumber());
-								System.out.println("invoice Date\t:"+invoiceObj.getInvoiceDate());
-								System.out.println("number Of Items\t:"+invoiceObj.getNumberOfItems());
-								System.out.println("total Amount\t:"+invoiceObj.getTotalAmount());
-								System.out.println("paid Amount\t:"+invoiceObj.getPaidAmount());
-								System.out.println("balance\t:"+invoiceObj.getBalance()+"\n");
-								
+
+								Invoice invoiceObj = Reporting.getInvoicesReport(scan.nextLine());
+								;
+
+								System.out.println("customer Full Name\t:" + invoiceObj.getCustomerFullName());
+								System.out.println("phone Number\t:" + invoiceObj.getPhoneNumber());
+								System.out.println("invoice Date\t:" + invoiceObj.getInvoiceDate());
+								System.out.println("number Of Items\t:" + invoiceObj.getNumberOfItems());
+								System.out.println("total Amount\t:" + invoiceObj.getTotalAmount());
+								System.out.println("paid Amount\t:" + invoiceObj.getPaidAmount());
+								System.out.println("balance\t:" + invoiceObj.getBalance() + "\n");
+
 								System.out.println("\t\t<items purches>");
-								for(Product p :invoiceObj.getlistOfPurchaseItems()) {
-									System.out.println("\titem id\t:"+p.getItemID());
-									System.out.println("\titem name\t:"+p.getItemName());
-									System.out.println("\titem unit price\t:"+p.getUnitPrice());
-									System.out.println("\titem quantity\t:"+p.getQuantity());
-								    System.out.println("\titem qty amount\t:"+p.getQtyAmount() +"\n");
-								}	}
-								else {System.out.println("\tno invoices added to search between\n");}
-								
-								
-							
-						
+								for (Product p : invoiceObj.getlistOfPurchaseItems()) {
+									System.out.println("\titem id\t:" + p.getItemID());
+									System.out.println("\titem name\t:" + p.getItemName());
+									System.out.println("\titem unit price\t:" + p.getUnitPrice());
+									System.out.println("\titem quantity\t:" + p.getQuantity());
+									System.out.println("\titem qty amount\t:" + p.getQtyAmount() + "\n");
+								}
+							} else {
+								System.out.println("\tno invoices added to search between\n");
+							}
+
 							break;
-						
+
 						case "f":
 
 							settingFlag = false;
@@ -166,7 +171,7 @@ System.out.println("\t-------------------------------\n");
 					ManageShopItems++;
 					boolean itemsFlag = true;
 					while (itemsFlag) {
-					
+
 						System.out.println("chose from the Shop Settings :\n a. Add Items \n" + " b. Delete Items\n"
 								+ " c. Change Item Price\n" + " d. Report All Items\n" + " f. go Back");
 						String subMenuResponce = scan.nextLine().toLowerCase();
@@ -190,104 +195,93 @@ System.out.println("\t-------------------------------\n");
 							System.out.println("what is the item qtyAmount");
 							product.setQtyAmount(scan.nextInt());
 							System.out.println(product.getItemName());
-						
+
 							scan.nextLine();
 							Reporting.creatItemsReport(product);
 							listOfItems.put(itemCount, product);
 
 							break;
 						case "b":
-							if(menu.getListOfItems()!=null) {
-								if(menu.getListOfItems().size()>0) {
-							System.out.println("Delete Items from the new items list : \nenter the item id you want to delete from below list\n ");
-							for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
-								System.out.println(
-										"Item Id: " + entry.getKey() + ", Item Name: " + entry.getValue().getItemName());
+							if (menu.getListOfItems() != null) {
+								if (menu.getListOfItems().size() > 0) {
+									System.out.println(
+											"Delete Items from the new items list : \nenter the item id you want to delete from below list\n ");
+									for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
+										System.out.println("Item Id: " + entry.getKey() + ", Item Name: "
+												+ entry.getValue().getItemName());
 
+									}
+									try {
+										if (listOfItems.remove(scan.nextInt()) != null) {
+											scan.nextLine();
+										} else {
+											System.out.println("\nno items with this id currently added\n");
+										}
+
+									} catch (Exception error) {
+										System.out.println("\nno items with this id currently added\n");
+										scan.nextLine();
+									}
+								} else {
+									System.out.println("\n\tno new items added to be deleted\n");
+								}
+							} else {
+								System.out.println("\n\tno new items added to be deleted\n");
 							}
-							try {
-								if(listOfItems.remove(scan.nextInt())!=null) {
-									scan.nextLine();
-							}
-							else {
-								System.out.println("\nno items with this id currently added\n");
-							}
-						
-					
-							}catch (Exception error) {
-								System.out.println("\nno items with this id currently added\n");
-								scan.nextLine();
-							}}
-								else {System.out.println("\n\tno new items added to be deleted\n");}}
-							else {System.out.println("\n\tno new items added to be deleted\n");}
 							break;
 						case "c":
-							if(Reporting.countItemsFiles()>0) {
-							System.out.println("which item you want to change it is price from below list ");
-for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
-								
-								Product p=Reporting.getitemsReport(i.toString());
-								
-								System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
-									+ p.getItemName() + "\n\tItem price: "
-										+ p.getUnitPrice()+"\n");
+							if (Reporting.countItemsFiles() > 0) {
+								System.out.println("which item you want to change it is price from below list ");
+								for (Long i = (long) 1; i <= Reporting.countItemsFiles(); i++) {
 
-						
-							
-							}
+									Product p = Reporting.getitemsReport(i.toString());
 
+									System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
+											+ p.getItemName() + "\n\tItem price: " + p.getUnitPrice() + "\n");
 
+								}
 
+								System.out.println("what is the item id");
+								Integer id = 0;
+								id = scan.nextInt();
 
+								if (Reporting.getitemsReport(id.toString()) != null) {
 
-							System.out.println("what is the item id");	
-							Integer id=0;
-							id= scan.nextInt();
-				
-							if(Reporting.getitemsReport(id.toString())!=null) {
-						
-								System.out.println("what is the new item unit price");
-								float price = scan.nextFloat();
-								
-								
-								Product pp = new Product();
+									System.out.println("what is the new item unit price");
+									float price = scan.nextFloat();
 
-								pp.setItemID(itemCount);
-							Product theSelctetitem =Reporting.getitemsReport(id.toString());
-							pp.setItemID(id);
-							pp.setItemName(theSelctetitem.getItemName());
-							
-							pp.setUnitPrice(price);
-					
-							pp.setQuantity(theSelctetitem.getQuantity());
-							
-							
-							pp.setQtyAmount(theSelctetitem.getQtyAmount());
-							
-							
-							
-							Reporting.creatItemsReport(pp);
-						scan.nextLine();
-							}
-							else {
-								System.out.println("\n\tno items added with this id\n");}
-							}else {
+									Product pp = new Product();
+
+									pp.setItemID(itemCount);
+									Product theSelctetitem = Reporting.getitemsReport(id.toString());
+									pp.setItemID(id);
+									pp.setItemName(theSelctetitem.getItemName());
+
+									pp.setUnitPrice(price);
+
+									pp.setQuantity(theSelctetitem.getQuantity());
+
+									pp.setQtyAmount(theSelctetitem.getQtyAmount());
+
+									Reporting.creatItemsReport(pp);
+									scan.nextLine();
+								} else {
+									System.out.println("\n\tno items added with this id\n");
+								}
+							} else {
 								System.out.println("\n\tno items added\n");
 							}
 							break;
 						case "d":
 							System.out.println("Report All Items");
 
-for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
-								
-								Product p=Reporting.getitemsReport(i.toString());
-								
-								System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
-									+ p.getItemName() + "\n\tItem price: "
-										+ p.getUnitPrice()+"\n");
+							for (Long i = (long) 1; i <= Reporting.countItemsFiles(); i++) {
 
-						
-							
+								Product p = Reporting.getitemsReport(i.toString());
+
+								System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: " + p.getItemName()
+										+ "\n\tItem price: " + p.getUnitPrice() + "\n");
+
 							}
 							break;
 						case "f":
@@ -307,25 +301,24 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					boolean purchaseFlag = true;
 					ArrayList<Product> listOfPurchaseItems = new ArrayList<>();
 					System.out.println("enter the item id , customer purchase from below list of items ");
-					for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
-						
-						Product p=Reporting.getitemsReport(i.toString());
-						
-						System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: "
-							+ p.getItemName() + "\n\tItem price: "
-								+ p.getUnitPrice()+"\n");
+					for (Long i = (long) 1; i <= Reporting.countItemsFiles(); i++) {
 
-				}
-					
+						Product p = Reporting.getitemsReport(i.toString());
+
+						System.out.println("\n\nItem Id: " + p.getItemID() + "\n\tItem Name: " + p.getItemName()
+								+ "\n\tItem price: " + p.getUnitPrice() + "\n");
+
+					}
+
 					while (purchaseFlag) {
 						listOfPurchaseItems.add(Reporting.getitemsReport(scan.nextLine()));
-					
+
 						System.out.println("do you want to add another purchase? yes/no");
 						if (scan.nextLine().equals("no")) {
 							for (Product p : listOfPurchaseItems) {
 								totalAmount += p.getUnitPrice();
 								System.out.println("the purches");
-								System.out.println(p.getItemID() +" "+p.getItemName());
+								System.out.println(p.getItemID() + " " + p.getItemName());
 							}
 							purchaseFlag = false;
 						} else {
@@ -345,14 +338,15 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					invoice.setInvoiceDate(formatDateTime);
 					invoice.setNumberOfItems(listOfPurchaseItems.size());
 					invoice.setTotalAmount(totalAmount);
-					System.out.println("what is the customer paid Amount ? total amount\t:" +totalAmount);
-					int paidAmount=scan.nextInt();
-					while(paidAmount<totalAmount) {
-						
-						System.out.println("the customer paid less Amount then the total amount\nleft to pay\t:"+(totalAmount - paidAmount)+"\n ");
-						 paidAmount=scan.nextInt();
+					System.out.println("what is the customer paid Amount ? total amount\t:" + totalAmount);
+					int paidAmount = scan.nextInt();
+					while (paidAmount < totalAmount) {
+
+						System.out.println("the customer paid less Amount then the total amount\nleft to pay\t:"
+								+ (totalAmount - paidAmount) + "\n ");
+						paidAmount = scan.nextInt();
 					}
-					
+
 					invoice.setPaidAmount(paidAmount);
 					scan.nextLine();
 					invoice.setBalance(invoice.getPaidAmount() - totalAmount);
@@ -364,94 +358,91 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 
 				case "d":
 					staticsreport++;
-				int TotalSales=0;
-				
-					for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
-						
-						Invoice p=Reporting.getInvoicesReport(i.toString());
-						
-						TotalSales+=p.getTotalAmount();
-				
-						}
-					Reporting.createStatisticsReport("No Of Items\t:" +Reporting.countItemsFiles()+ "\nNo of Invoices\t:" +Reporting.countInvoiceFiles()+ "\nTotal Sales\t:"+
-							TotalSales);
+					int TotalSales = 0;
+
+					for (Long i = (long) 1; i <= Reporting.countInvoiceFiles(); i++) {
+
+						Invoice p = Reporting.getInvoicesReport(i.toString());
+
+						TotalSales += p.getTotalAmount();
+
+					}
+					Reporting.createStatisticsReport("No Of Items\t:" + Reporting.countItemsFiles()
+							+ "\nNo of Invoices\t:" + Reporting.countInvoiceFiles() + "\nTotal Sales\t:" + TotalSales);
 					System.out.println("file created succefully");
 					break;
 
 				case "e":
-					if(Reporting.countInvoiceFiles()>0){
-					AllInvoicesreport++;
-					Shop s = Reporting.getShopInfoFile();
-					String whatToWrite;
-					try {
-					 whatToWrite="\n\t\t"+s.getName()+"\n"+
-							s.getEmail()+"\n"+s.getFax()+"\n"+s.getWebsite()+"\n"+s.getTel()+"\n"+"\n";
-					}
-					 catch (Exception error) {
-						 whatToWrite="";
-					 }
-					for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
-						
-						Invoice p=Reporting.getInvoicesReport(i.toString());
-						
-						whatToWrite+=("\nInvoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
-								+ p.getCustomerFullName()+ "\n\tInvoice date "
-								+ p.getInvoiceDate()+ "\n\tBalance "
-										+ p.getBalance()+"\n------------------------------\n\n"
-				);
+					if (Reporting.countInvoiceFiles() > 0) {
+						AllInvoicesreport++;
+						Shop s = Reporting.getShopInfoFile();
+						String whatToWrite;
+						try {
+							whatToWrite = "\n\t\t" + s.getName() + "\n" + s.getEmail() + "\n" + s.getFax() + "\n"
+									+ s.getWebsite() + "\n" + s.getTel() + "\n" + "\n";
+						} catch (Exception error) {
+							whatToWrite = "";
 						}
-					Reporting.createAllInvoiceReport(whatToWrite
-				);
-					System.out.println("file created succefully");}
-					else {
+						for (Long i = (long) 1; i <= Reporting.countInvoiceFiles(); i++) {
+
+							Invoice p = Reporting.getInvoicesReport(i.toString());
+
+							whatToWrite += ("\nInvoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
+									+ p.getCustomerFullName() + "\n\tInvoice date " + p.getInvoiceDate()
+									+ "\n\tBalance " + p.getBalance() + "\n------------------------------\n\n");
+						}
+						Reporting.createAllInvoiceReport(whatToWrite);
+						System.out.println("file created succefully");
+					} else {
 						System.out.println("invoices need to be added to create this file\n");
 					}
 					break;
 
 				case "f":
 					showProgramStatistics++;
-						ps.setAllInvoicesreport(AllInvoicesreport);
+					ps.setAllInvoicesreport(AllInvoicesreport);
 					ps.setCreateInvoice(createInvoice);
-					
+
 					ps.setManageShopItems(ManageShopItems);
 					ps.setShopSettings(ShopSettings);
 					ps.setStaticsreport(staticsreport);
 					ps.setShowProgramStatistics(showProgramStatistics);
-				Reporting.createProgramStatisticsReport(ps);
-				
-				System.out.println(
-					"\n\t\tthe program statics\n\nShop Settings\t:"+Reporting.getProgramStatisticsReport().getShopSettings()
-				+  "\nManage Shop Items\t:"+Reporting.getProgramStatisticsReport().getManageShopItems()
-				+  "\ncreate Invoice\t:"+Reporting.getProgramStatisticsReport().getCreateInvoice()
-				+"\nreate items/invoices statics report\t:"+Reporting.getProgramStatisticsReport().getStaticsreport()
-				+"\ncreate All Invoices report\t:"+Reporting.getProgramStatisticsReport().getAllInvoicesreport()
-				+"\nshow Program Statistics\t:"+Reporting.getProgramStatisticsReport().getShowProgramStatistics()+"\n");
-					
-				break;
+					Reporting.createProgramStatisticsReport(ps);
+
+					System.out.println("\n\t\tthe program statics\n\nShop Settings\t:"
+							+ Reporting.getProgramStatisticsReport().getShopSettings() + "\nManage Shop Items\t:"
+							+ Reporting.getProgramStatisticsReport().getManageShopItems() + "\ncreate Invoice\t:"
+							+ Reporting.getProgramStatisticsReport().getCreateInvoice()
+							+ "\nreate items/invoices statics report\t:"
+							+ Reporting.getProgramStatisticsReport().getStaticsreport()
+							+ "\ncreate All Invoices report\t:"
+							+ Reporting.getProgramStatisticsReport().getAllInvoicesreport()
+							+ "\nshow Program Statistics\t:"
+							+ Reporting.getProgramStatisticsReport().getShowProgramStatistics() + "\n");
+
+					break;
 				case "x":
 					System.out.println("Are you sure you want to exit? yes/no");
 					if (scan.nextLine().toLowerCase().equals("no")) {
 						System.out.println("\t\tstarting of shop program");
 					} else if (scan.nextLine().toLowerCase().equals("yes")) {
 						System.out.println("Exit the shop program");
-				
+
 						programFlag = false;
 
 					}
 					break;
 				}
 
-
-				System.out.println(
-						"chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
+				System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
 						+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
 
 			}
 		} catch (Exception error) {
-			
+
 			System.out.println(error.getMessage());
 		}
-		
+
 	}
 
 }
