@@ -61,6 +61,7 @@ public class shopMainClass {
 						switch (subMenuResponce) {
 
 						case "a":
+							if(Reporting.countItemsFiles()>0){
 							System.out.println("\tLoad Data (Items)");
 							for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 								
@@ -70,23 +71,27 @@ public class shopMainClass {
 									+ p.getItemName() + "\n\tItem price: "
 										+ p.getUnitPrice()+"\n");
 
-						}
+						}}
 							
-							
+							else {System.out.println("\tno items added");}
 							
 							
 							System.out.println("\t-------------------------------\n");
-							System.out.println("\tLoad Data (invoices)\n");
-					
-for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
+							
+							if(Reporting.countInvoiceFiles()>0){
+								System.out.println("\tLoad Data (invoices)\n" +Reporting.countInvoiceFiles());
 								
-			Invoice p=Reporting.getInvoicesReport(i.toString());
-								
-								System.out.println("Invoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
-									+ p.getCustomerFullName()+ "\n\tInvoice date "
-										+ p.getInvoiceDate()+"\n");
-
-						}
+								for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
+																
+											Invoice p=Reporting.getInvoicesReport(i.toString());
+																
+																System.out.println("Invoice Id: " + p.getInvoiceId() + "\n\tcustomer Name: "
+																	+ p.getCustomerFullName()+ "\n\tInvoice date "
+																		+ p.getInvoiceDate()+"\n");
+								}
+														}
+								else {System.out.println("\tno invoices added");}
+							
 System.out.println("\t-------------------------------\n");
 							break;
 						case "b":
@@ -108,9 +113,9 @@ System.out.println("\t-------------------------------\n");
 							
 						case "d":
 
-						
+							if(Reporting.countInvoiceFiles()>0){
 								System.out.println("pls enter the inovise id you want to show :");
-							
+								
 								Invoice invoiceObj =	Reporting.getInvoicesReport(scan.nextLine());;
 						
 								System.out.println("customer Full Name\t:"+invoiceObj.getCustomerFullName());
@@ -128,8 +133,10 @@ System.out.println("\t-------------------------------\n");
 									System.out.println("\titem unit price\t:"+p.getUnitPrice());
 									System.out.println("\titem quantity\t:"+p.getQuantity());
 								    System.out.println("\titem qty amount\t:"+p.getQtyAmount() +"\n");
+								}	}
+								else {System.out.println("\tno invoices added to search between\n");}
 								
-								}
+								
 							
 						
 							break;
@@ -329,6 +336,7 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					break;
 
 				case "e":
+					if(Reporting.countInvoiceFiles()>0){
 					AllInvoicesreport++;
 					String whatToWrite="";
 					for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
@@ -343,7 +351,10 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 						}
 					Reporting.createAllInvoiceReport(whatToWrite
 				);
-					System.out.println("file created succefully");
+					System.out.println("file created succefully");}
+					else {
+						System.out.println("invoices need to be added to create this file\n");
+					}
 					break;
 
 				case "f":
