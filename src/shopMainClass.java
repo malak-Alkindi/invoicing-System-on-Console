@@ -1,20 +1,26 @@
 
+import java.io.File;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-
-
+import java.util.stream.Stream;
 import java.util.Scanner;
 
 public class shopMainClass {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		LocalDateTime now = LocalDateTime.now();
+	
+	
+			Reporting.createFolderItemsReport();
+			Reporting.createFolderInvoiceReport();
+		
 		
 		 int ShopSettings=Reporting.getProgramStatisticsReport().getShopSettings();
 		 int ManageShopItems=Reporting.getProgramStatisticsReport().getManageShopItems();

@@ -12,7 +12,34 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class Reporting  implements Serializable{
+static void createFolderItemsReport() {
+	try (Stream<Path> files = Files.list(Paths.get("itemsReport"))) {
+		
 
+		files.close();
+	} catch (IOException e) {
+
+		new File("itemsReport").mkdirs();
+			System.out.println("itemsReport folder created");
+
+	}
+	
+
+}
+static void createFolderInvoiceReport() {
+	try (Stream<Path> files = Files.list(Paths.get("invoiceReport"))) {
+		
+
+		files.close();
+	} catch (IOException e) {
+	
+		new File("invoiceReport").mkdirs();
+		System.out.println("invoiceReport folder created");
+
+	}
+	
+	
+}
 	static Long countItemsFiles() {
 		Long count;
 		try (Stream<Path> files = Files.list(Paths.get("itemsReport"))) {
@@ -45,7 +72,7 @@ public class Reporting  implements Serializable{
 	static void createInvoiceReport(Invoice i) {
 
 		try {
-			new File("invoiceReport").mkdirs();
+		
 
 			File oldFile = new File(i.getInvoiceId() + ".txt");
 			File newFile = new File("invoiceReport\\" + i.getInvoiceId() + ".txt");
@@ -64,7 +91,7 @@ public class Reporting  implements Serializable{
 
 	static void creatItemsReport(Product p) {
 		try {
-			new File("itemsReport").mkdirs();
+			
 
 			File oldFile = new File(p.getItemID() + ".txt");
 			File newFile = new File("itemsReport\\" + p.getItemID() + ".txt");
