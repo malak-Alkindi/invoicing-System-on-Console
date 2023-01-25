@@ -1,5 +1,5 @@
 		Statistics
 
-No Of Items	:1
-No of Invoices	:0
-Total Sales	:0
+No Of Items	:9
+No of Invoices	:1
+Total Sales	:10

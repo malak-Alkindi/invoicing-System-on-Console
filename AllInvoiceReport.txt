@@ -1,0 +1,7 @@
+		AllInvoiceReport
+Invoice Id: 1
+	customer Name: malak
+	Invoice date 25-01-2023 11:15:06
+	Balance 0
+------------------------------
+

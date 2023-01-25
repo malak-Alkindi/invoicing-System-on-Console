@@ -322,7 +322,7 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 							for (Product p : listOfPurchaseItems) {
 								totalAmount += p.getUnitPrice();
 								System.out.println("the purches");
-								System.out.println(p.getItemID());
+								System.out.println(p.getItemID() +" "+p.getItemName());
 							}
 							purchaseFlag = false;
 						} else {
@@ -342,13 +342,21 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					invoice.setInvoiceDate(formatDateTime);
 					invoice.setNumberOfItems(listOfPurchaseItems.size());
 					invoice.setTotalAmount(totalAmount);
-					System.out.println("what is the customer paid Amount ?");
-					invoice.setPaidAmount(scan.nextInt());
+					System.out.println("what is the customer paid Amount ? total amount\t:" +totalAmount);
+					int paidAmount=scan.nextInt();
+					while(paidAmount<totalAmount) {
+						
+						System.out.println("the customer paid less Amount then the total amount\nleft to pay\t:"+(totalAmount - paidAmount)+"\n ");
+						 paidAmount=scan.nextInt();
+					}
+					
+					invoice.setPaidAmount(paidAmount);
 					scan.nextLine();
 					invoice.setBalance(invoice.getPaidAmount() - totalAmount);
 					mapOfInvoices.put(inoviceCount, invoice);
 					Reporting.createInvoiceReport(invoice);
 					menu.setMapOfInvoices(mapOfInvoices);
+					System.out.println("invoice created secufully");
 					break;
 
 				case "d":
