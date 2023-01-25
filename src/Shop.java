@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Shop {
+public class Shop implements Serializable{
 	
 	private Integer Tel; 
 	private	String Fax ;

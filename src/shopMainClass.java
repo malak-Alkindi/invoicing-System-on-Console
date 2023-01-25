@@ -108,18 +108,21 @@ System.out.println("\t-------------------------------\n");
 						case "b":
 							System.out.println("pls enter Shop Name");
 							shop.setName(scan.nextLine());
+							Reporting.creatShopInfoFile(shop);
 						
 							break;
 						case "c":
 							System.out.println("Set Invoice Header (Tel / Fax / Email / Website)");
 							System.out.println("pls enter Tel ");
 							shop.setTel(scan.nextInt());
+							scan.nextLine();
 							System.out.println("pls enter Fax ");
-							shop.setName(scan.nextLine());
+							shop.setFax(scan.nextLine());
 							System.out.println("pls enter Email ");
 							shop.setEmail(scan.nextLine());
 							System.out.println("pls enter Website ");
 							shop.setWebsite(scan.nextLine());
+							Reporting.creatShopInfoFile(shop);
 							break;
 							
 						case "d":
@@ -378,7 +381,15 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 				case "e":
 					if(Reporting.countInvoiceFiles()>0){
 					AllInvoicesreport++;
-					String whatToWrite="";
+					Shop s = Reporting.getShopInfoFile();
+					String whatToWrite;
+					try {
+					 whatToWrite="\n\t\t"+s.getName()+"\n"+
+							s.getEmail()+"\n"+s.getFax()+"\n"+s.getWebsite()+"\n"+s.getTel()+"\n"+"\n";
+					}
+					 catch (Exception error) {
+						 whatToWrite="";
+					 }
 					for(Long i=(long) 1;i<=Reporting.countInvoiceFiles();i++) {
 						
 						Invoice p=Reporting.getInvoicesReport(i.toString());

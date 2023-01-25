@@ -40,6 +40,7 @@ static void createFolderInvoiceReport() {
 	
 	
 }
+
 	static Long countItemsFiles() {
 		Long count;
 		try (Stream<Path> files = Files.list(Paths.get("itemsReport"))) {
@@ -159,8 +160,44 @@ static void createFolderInvoiceReport() {
 		}
 
 	}
+	static void creatShopInfoFile(Shop s) throws IOException {
+		try {
+		
 
+			File oldFile = new File( "shopInfo.txt");
+			
+			FileOutputStream ff = new FileOutputStream(oldFile);
+			ObjectOutputStream o = new ObjectOutputStream(ff);
+
+			// Write objects to file
+			o.writeObject(s);
+
+			o.close();
+			ff.close();
+		} catch (Exception error) {
+			error.getMessage();
+		}
+
+	}
+	static Shop getShopInfoFile() {
+		Shop in=null;
 	
+		try {
+			FileInputStream fi = new FileInputStream(new File("shopInfo.txt"));
+			ObjectInputStream oi = new ObjectInputStream(fi);
+
+			// Read objects
+			 in = (Shop) oi.readObject();
+
+		
+
+			oi.close();
+			fi.close();
+		} catch (Exception error) {
+			error.getMessage();
+		}
+return in;
+	}
 	static ProgramStatistics getProgramStatisticsReport() {
 		ProgramStatistics in=null;
 	
