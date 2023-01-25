@@ -20,15 +20,26 @@ public class shopMainClass {
 	
 			Reporting.createFolderItemsReport();
 			Reporting.createFolderInvoiceReport();
+			
+			 int ShopSettings=0;
+			 int ManageShopItems=0;
+			 int createInvoice =0;
+			 int staticsreport=0;
+			 int  AllInvoicesreport=0;
+			 int  showProgramStatistics=0;
 		
-		
-		 int ShopSettings=Reporting.getProgramStatisticsReport().getShopSettings();
-		 int ManageShopItems=Reporting.getProgramStatisticsReport().getManageShopItems();
-		 int createInvoice =Reporting.getProgramStatisticsReport().getCreateInvoice();
-		 int staticsreport=Reporting.getProgramStatisticsReport().getStaticsreport();
-		 int  AllInvoicesreport=Reporting.getProgramStatisticsReport().getAllInvoicesreport();
-		 int  showProgramStatistics=Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
-	
+		try {
+		ShopSettings=Reporting.getProgramStatisticsReport().getShopSettings();
+		 ManageShopItems=Reporting.getProgramStatisticsReport().getManageShopItems();
+		  createInvoice =Reporting.getProgramStatisticsReport().getCreateInvoice();
+		  staticsreport=Reporting.getProgramStatisticsReport().getStaticsreport();
+		   AllInvoicesreport=Reporting.getProgramStatisticsReport().getAllInvoicesreport();
+		   showProgramStatistics=Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
+		}
+		catch (Exception error) {
+			
+			error.getMessage();
+		}
 		 ProgramStatistics ps =new ProgramStatistics();
 		try (Scanner scan = new Scanner(System.in)) {
 			Menu menu = new Menu();
@@ -149,10 +160,10 @@ System.out.println("\t-------------------------------\n");
 					}
 					break;
 				case "b":
-					
+					ManageShopItems++;
 					boolean itemsFlag = true;
 					while (itemsFlag) {
-						ManageShopItems++;
+					
 						System.out.println("chose from the Shop Settings :\n a. Add Items \n" + " b. Delete Items\n"
 								+ " c. Change Item Price\n" + " d. Report All Items\n" + " f. go Back");
 						String subMenuResponce = scan.nextLine().toLowerCase();
@@ -183,7 +194,9 @@ System.out.println("\t-------------------------------\n");
 
 							break;
 						case "b":
-							System.out.println("Delete Items : enter the item id you want to delete from below list ");
+							if(menu.getListOfItems()!=null) {
+								if(menu.getListOfItems().size()>0) {
+							System.out.println("Delete Items from the new items list : \nenter the item id you want to delete from below list\n ");
 							for (Entry<Integer, Product> entry : menu.getListOfItems().entrySet()) {
 								System.out.println(
 										"Item Id: " + entry.getKey() + ", Item Name: " + entry.getValue().getItemName());
@@ -191,7 +204,9 @@ System.out.println("\t-------------------------------\n");
 							}
 							listOfItems.remove(scan.nextInt());
 							scan.nextLine();
-
+							}
+								else {System.out.println("\n\tno new items added to be deleted\n");}}
+							else {System.out.println("\n\tno new items added to be deleted\n");}
 							break;
 						case "c":
 							System.out.println("which item you want to change it is price from below list ");
@@ -361,6 +376,7 @@ for(Long i=(long) 1;i<=Reporting.countItemsFiles();i++) {
 					showProgramStatistics++;
 						ps.setAllInvoicesreport(AllInvoicesreport);
 					ps.setCreateInvoice(createInvoice);
+					
 					ps.setManageShopItems(ManageShopItems);
 					ps.setShopSettings(ShopSettings);
 					ps.setStaticsreport(staticsreport);
