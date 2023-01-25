@@ -75,7 +75,6 @@ static void createFolderInvoiceReport() {
 		try {
 		
 
-			File oldFile = new File(i.getInvoiceId() + ".txt");
 			File newFile = new File("invoiceReport\\" + i.getInvoiceId() + ".txt");
 			FileOutputStream ff = new FileOutputStream(newFile);
 			ObjectOutputStream o = new ObjectOutputStream(ff);
@@ -93,8 +92,6 @@ static void createFolderInvoiceReport() {
 	static void creatItemsReport(Product p) {
 		try {
 			
-
-			File oldFile = new File(p.getItemID() + ".txt");
 			File newFile = new File("itemsReport\\" + p.getItemID() + ".txt");
 		
 			FileOutputStream ff = new FileOutputStream(newFile);
@@ -113,7 +110,7 @@ static void createFolderInvoiceReport() {
 
 	static void createAllInvoiceReport(String name) throws IOException {
 
-		File file = new File("AllInvoiceReport.txt");
+	
 		FileWriter w = new FileWriter("AllInvoiceReport.txt");
 		w.write("\t\tAllInvoiceReport");
 		w.write(name);
@@ -122,7 +119,7 @@ static void createFolderInvoiceReport() {
 	}
 	static void createStatisticsReport(String name) throws IOException {
 
-		File file = new File("Statistics.txt");
+	
 		FileWriter w = new FileWriter("Statistics .txt");
 		w.write("\t\tStatistics\n\n");
 		w.write(name);

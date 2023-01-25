@@ -1,15 +1,10 @@
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.stream.Stream;
 import java.util.Scanner;
 
 public class shopMainClass {
@@ -20,12 +15,12 @@ public class shopMainClass {
 		Reporting.createFolderItemsReport();
 		Reporting.createFolderInvoiceReport();
 
-		int ShopSettings ;
-		int ManageShopItems  ;
-		int createInvoice ;
-		int staticsreport ;
-		int AllInvoicesreport ;
-		int showProgramStatistics ;
+		int ShopSettings;
+		int ManageShopItems;
+		int createInvoice;
+		int staticsreport;
+		int AllInvoicesreport;
+		int showProgramStatistics;
 
 		try {
 			ShopSettings = Reporting.getProgramStatisticsReport().getShopSettings();
@@ -36,11 +31,11 @@ public class shopMainClass {
 			showProgramStatistics = Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
 		} catch (Exception error) {
 			ShopSettings = 0;
-		 ManageShopItems = 0;
-			 createInvoice = 0;
-			 staticsreport = 0;
-			 AllInvoicesreport = 0;
-			 showProgramStatistics = 0;
+			ManageShopItems = 0;
+			createInvoice = 0;
+			staticsreport = 0;
+			AllInvoicesreport = 0;
+			showProgramStatistics = 0;
 			error.getMessage();
 		}
 		ProgramStatistics ps = new ProgramStatistics();
