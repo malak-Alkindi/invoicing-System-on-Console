@@ -12,29 +12,18 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class Reporting  implements Serializable{
-static void createFolderItemsReport() {
-	try (Stream<Path> files = Files.list(Paths.get("itemsReport"))) {
-		
 
-		files.close();
-	} catch (IOException e) {
-
-		new File("itemsReport").mkdirs();
-			System.out.println("itemsReport folder created");
-
-	}
 	
 
-}
-static void createFolderInvoiceReport() {
-	try (Stream<Path> files = Files.list(Paths.get("invoiceReport"))) {
+static void createFoldersReport(String folderName) {
+	try (Stream<Path> files = Files.list(Paths.get(folderName))) {
 		
 
 		files.close();
 	} catch (IOException e) {
 	
-		new File("invoiceReport").mkdirs();
-		System.out.println("invoiceReport folder created");
+		new File(folderName).mkdirs();
+		System.out.println(folderName+" folder created");
 
 	}
 	
@@ -254,4 +243,6 @@ return in;
 		 return in;
 
 	}
+	
+	
 }

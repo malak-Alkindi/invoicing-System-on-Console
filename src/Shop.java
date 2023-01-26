@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public class Shop implements Serializable{
 	
-	private Integer Tel; 
+	private String telephoneNumber; 
 	private	String Fax ;
 	private	String Email ;
 	private	String name; 
@@ -16,8 +16,8 @@ public class Shop implements Serializable{
 	}
 	private	String Website;
 	
-	public void setTel(Integer tel) {
-		Tel = tel;
+	public void setTel(String tel) {
+		telephoneNumber = tel;
 	}
 	
 	public void setFax(String fax) {
@@ -32,8 +32,8 @@ public class Shop implements Serializable{
 		Website = website;
 	}
 
-	public Integer getTel() {
-		return Tel;
+	public String getTel() {
+		return telephoneNumber;
 	}
 	
 	public String getFax() {

@@ -1,32 +1,37 @@
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Menu implements Serializable {
-	  HashMap<Integer, Invoice> mapOfInvoices ;
-	  HashMap<Integer, Product> listOfItems  ;
+	  Map<Integer, Invoice> mapOfInvoices ;
+	 Map<Integer, Product> listOfItems  ;
 	  
 
 	
 
 	public HashMap<Integer, Invoice> getMapOfInvoices() {
-		return mapOfInvoices;
+		return (HashMap<Integer, Invoice>) mapOfInvoices;
 	}
 
 	
-	public void setMapOfInvoices(HashMap<Integer, Invoice> mapOfInvoices) {
-		this.mapOfInvoices = mapOfInvoices;
+	public void setMapOfInvoices(Map<Integer, Invoice> mapOfInvoices2) {
+		this.mapOfInvoices = mapOfInvoices2;
 	}
 
 
 	public HashMap<Integer, Product> getListOfItems() {
-		return listOfItems;
+		return (HashMap<Integer, Product>) listOfItems;
 	}
 
 
-	public void setListOfItems(HashMap<Integer, Product> listOfItems) {
-		this.listOfItems = listOfItems;
+	public void setListOfItems(Map<Integer, Product> listOfItems2) {
+		this.listOfItems = listOfItems2;
 	}
-
+	public void setListOfItems(String arr[]) {
+for(String a:arr) {
+System.out.println(a +"\n");	
+}
+	}
 
 
 }

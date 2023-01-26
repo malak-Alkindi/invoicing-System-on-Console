@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -12,29 +13,39 @@ public class shopMainClass {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		LocalDateTime now = LocalDateTime.now();
 
-		Reporting.createFolderItemsReport();
-		Reporting.createFolderInvoiceReport();
+	
+		Reporting.createFoldersReport("invoiceReport");
+		Reporting.createFoldersReport("itemsReport");
+		String[] invoiceMenuArray= {"chose from the Shop Settings","a. Load Data (Items and invoices)",
+				 "b. Set Shop Name" , "c. Set Invoice Header(Tel / Fax / Email / Website)"
+				,"d. search Invoice" , "f. Go Back"};
 
-		int ShopSettings;
-		int ManageShopItems;
-		int createInvoice;
-		int staticsreport;
-		int AllInvoicesreport;
-		int showProgramStatistics;
-
+		String[] itemMenuArray = {"chose from the Shop Settings","a. Add Items" , "b. Delete Items", "c. Change Item Price" , "d. Report All Items", "f. go Back"};
+		
+		String[] mainMenuArray= {"chose one of the follwing","a) Shop Settings",  "b) Manage Shop Items",  "c) create Invoice" ,"d) create items/invoices statics report",
+				"e) create All Invoices report" , "f) show Program Statistics","x) exit "};
+		
+		Integer shopSettings;
+		Integer manageShopItems;
+		Integer createInvoice;
+		Integer staticsreport;
+		Integer allInvoicesreport;
+		Integer showProgramStatistics;
+		
+	
 		try {
-			ShopSettings = Reporting.getProgramStatisticsReport().getShopSettings();
-			ManageShopItems = Reporting.getProgramStatisticsReport().getManageShopItems();
+			shopSettings = Reporting.getProgramStatisticsReport().getShopSettings();
+			manageShopItems = Reporting.getProgramStatisticsReport().getManageShopItems();
 			createInvoice = Reporting.getProgramStatisticsReport().getCreateInvoice();
 			staticsreport = Reporting.getProgramStatisticsReport().getStaticsreport();
-			AllInvoicesreport = Reporting.getProgramStatisticsReport().getAllInvoicesreport();
+			allInvoicesreport = Reporting.getProgramStatisticsReport().getAllInvoicesreport();
 			showProgramStatistics = Reporting.getProgramStatisticsReport().getShowProgramStatistics();//
 		} catch (Exception error) {
-			ShopSettings = 0;
-			ManageShopItems = 0;
+			shopSettings = 0;
+			manageShopItems = 0;
 			createInvoice = 0;
 			staticsreport = 0;
-			AllInvoicesreport = 0;
+			allInvoicesreport = 0;
 			showProgramStatistics = 0;
 			error.getMessage();
 		}
@@ -44,14 +55,13 @@ public class shopMainClass {
 			int itemCount = Math.toIntExact(Reporting.countItemsFiles());
 			;
 			int inoviceCount = Math.toIntExact(Reporting.countInvoiceFiles());
-			HashMap<Integer, Product> listOfItems = new HashMap<>();
-			HashMap<Integer, Invoice> mapOfInvoices = new HashMap<>();
+			Map<Integer, Product> listOfItems = new HashMap<>();
+			Map<Integer, Invoice> mapOfInvoices = new HashMap<>();
 
 			Shop shop = new Shop();
 			boolean programFlag = true;
 			System.out.println("\t\tstarting of shop program");
-			System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
-					+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
+		menu.setListOfItems(mainMenuArray);
 			while (programFlag) {
 
 				String MainMenuResponce = scan.nextLine().toLowerCase();
@@ -61,10 +71,9 @@ public class shopMainClass {
 
 					boolean settingFlag = true;
 					while (settingFlag) {
-						ShopSettings++;
-						System.out.println("chose from the Shop Settings :\n a. Load Data (Items and invoices)\n"
-								+ " b. Set Shop Name\n" + " c. Set Invoice Header (Tel / Fax / Email / Website)\n"
-								+ " d. search Invoice\n" + " f. Go Back\r");
+						shopSettings++;
+						menu.setListOfItems(invoiceMenuArray);
+			
 						String subMenuResponce = scan.nextLine().toLowerCase();
 
 						switch (subMenuResponce) {
@@ -114,8 +123,8 @@ public class shopMainClass {
 						case "c":
 							System.out.println("Set Invoice Header (Tel / Fax / Email / Website)");
 							System.out.println("pls enter Tel ");
-							shop.setTel(scan.nextInt());
-							scan.nextLine();
+							shop.setTel(scan.nextLine());
+							
 							System.out.println("pls enter Fax ");
 							shop.setFax(scan.nextLine());
 							System.out.println("pls enter Email ");
@@ -163,12 +172,11 @@ public class shopMainClass {
 					}
 					break;
 				case "b":
-					ManageShopItems++;
+					manageShopItems++;
 					boolean itemsFlag = true;
 					while (itemsFlag) {
 
-						System.out.println("chose from the Shop Settings :\n a. Add Items \n" + " b. Delete Items\n"
-								+ " c. Change Item Price\n" + " d. Report All Items\n" + " f. go Back");
+						menu.setListOfItems(itemMenuArray);
 						String subMenuResponce = scan.nextLine().toLowerCase();
 
 						switch (subMenuResponce) {
@@ -369,7 +377,7 @@ public class shopMainClass {
 
 				case "e":
 					if (Reporting.countInvoiceFiles() > 0) {
-						AllInvoicesreport++;
+						allInvoicesreport++;
 						Shop s = Reporting.getShopInfoFile();
 						String whatToWrite;
 						try {
@@ -395,11 +403,11 @@ public class shopMainClass {
 
 				case "f":
 					showProgramStatistics++;
-					ps.setAllInvoicesreport(AllInvoicesreport);
+					ps.setAllInvoicesreport(allInvoicesreport);
 					ps.setCreateInvoice(createInvoice);
 
-					ps.setManageShopItems(ManageShopItems);
-					ps.setShopSettings(ShopSettings);
+					ps.setManageShopItems(manageShopItems);
+					ps.setShopSettings(shopSettings);
 					ps.setStaticsreport(staticsreport);
 					ps.setShowProgramStatistics(showProgramStatistics);
 					Reporting.createProgramStatisticsReport(ps);
@@ -429,8 +437,7 @@ public class shopMainClass {
 					break;
 				}
 
-				System.out.println("chose one of the follwing :\n  a) Shop Settings\n  b) Manage Shop Items  \n  c)"
-						+ " create Invoice \n  d) create items/invoices statics report \n  e) create All Invoices report \n  f) show Program Statistics \n  x) exit ");
+				menu.setListOfItems(mainMenuArray);
 
 			}
 		} catch (Exception error) {
